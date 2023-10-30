@@ -24,6 +24,7 @@ export default function MainScreen() {
     const [data, setData] = useState(initialData)
     const [editingItemId, setEditingItemId] = useState<string | null>(null)
 
+    // @ts-ignore
     const handleToggleTaskItem = useCallback(item => {
         setData(prevData => {
             const newData = [...prevData]
@@ -35,7 +36,7 @@ export default function MainScreen() {
             return newData
         })
     }, [])
-    const handleChangeTaskItemSubject = useCallback((item, newSubject) => {
+    const handleChangeTaskItemSubject = useCallback((item: { id: string; subject: string; done: boolean; }, newSubject: any) => {
         setData(prevData => {
             const newData = [...prevData]
             const index = prevData.indexOf(item)
@@ -46,13 +47,13 @@ export default function MainScreen() {
             return newData
         })
     }, [])
-    const handleFinishEditingTaskItem = useCallback(_item => {
+    const handleFinishEditingTaskItem = useCallback((_item: any) => {
         setEditingItemId(null)
     }, [])
-    const handlePressTaskItemLabel = useCallback(item => {
+    const handlePressTaskItemLabel = useCallback((item: { id: React.SetStateAction<string | null>; }) => {
         setEditingItemId(item.id)
     }, [])
-    const handleRemoveItem = useCallback(item => {
+    const handleRemoveItem = useCallback((item: { id: string; subject: string; done: boolean; }) => {
         setData(prevData => {
             const newData = prevData.filter(i => i !== item)
             return newData
